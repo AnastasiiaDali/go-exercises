@@ -33,7 +33,6 @@ func (n *arrayOfNumbers) Set(flag string) error {
 var ArrayOfNumbersFromCLI arrayOfNumbers
 
 func GetDataFromCLI() []int {
-	var numbers []int
 
 	//get numbers passed to cli
 	flag.Var(&ArrayOfNumbersFromCLI, "input-numbers", "pass numbers")
@@ -43,10 +42,24 @@ func GetDataFromCLI() []int {
 
 	flag.Parse()
 
-	if len(ArrayOfNumbersFromCLI) != 0 {
-		numbers = GetNumbersFromCLI()
-	} else if len(ArrayOfFileNamesFromCLI) != 0 {
-		numbers = GetNumbersFromFile()
-	}
+	numbers := DataDistributor(ArrayOfFileNamesFromCLI, ArrayOfNumbersFromCLI)
+
 	return numbers
 }
+
+//func DataDistributor(args Arguments) {
+//	if len(args.Numbers) != 0 {
+//		numbers = GetNumbersFromCLI(args.Numbers)
+//	} else if len(ArrayOfFileNamesFromCLI) != 0 {
+//		numbers = GetNumbersFromFile(args.File)
+//	}
+//	return numbers
+//}
+
+// what data are we getting from the flags?
+/*
+struct Arguments {
+	FileNames []string
+	Numbers []string
+}
+*/
